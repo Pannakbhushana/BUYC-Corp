@@ -6,12 +6,13 @@ import {
     Text,
     Stack,
     Image,
+    Button
   } from '@chakra-ui/react';
   
-  const IMAGE =
-    'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80';
   
-  export default function DealersCard() {
+  
+  export default function DealersCard({...el}) {
+    
     return (
       <Center py={12}>
         <Box
@@ -37,7 +38,7 @@ import {
               pos: 'absolute',
               top: 5,
               left: 0,
-              backgroundImage: `url(${IMAGE})`,
+              backgroundImage: `url(${el.image_url})`,
               filter: 'blur(15px)',
               zIndex: -1,
             }}
@@ -51,26 +52,47 @@ import {
               height={230}
               width={282}
               objectFit={'cover'}
-              src={IMAGE}
+              src={el.image_url}
             />
           </Box>
           <Stack pt={10} align={'center'}>
+            <Text fontWeight={800} fontSize={'xl'} textTransform={'uppercase'}>
+             Model- {el.model}
+            </Text>
             <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-              Brand
+              mileage- {el.mileage}
+            </Text>
+
+            <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
+            max_speed- {el.max_speed}
+            </Text>
+
+            <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
+            power- {el.power}
+            </Text>
+            <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
+             Year- {el.year}
             </Text>
             <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-              Nice Chair, pink
+             color- {el.color}
             </Heading>
             <Stack direction={'row'} align={'center'}>
               <Text fontWeight={800} fontSize={'xl'}>
-                $57
+               price- ${el.price}
               </Text>
               <Text textDecoration={'line-through'} color={'gray.600'}>
-                $199
+                ${Number(el.price)+10000}
               </Text>
             </Stack>
           </Stack>
+          <br />
+          <Button colorScheme='teal' size='lg'  onClick={()=>{}} >
+            Buy Now
+          </Button>
         </Box>
       </Center>
     );
   }
+
+  
+    
