@@ -22,11 +22,11 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
   } from '@chakra-ui/icons';
-  import {NavLink} from "react-router-dom"
+  import {NavLink,useNavigate} from "react-router-dom";
   
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
-  
+    const navigate=useNavigate();
     return (
       <Box>
         <Flex
@@ -39,7 +39,6 @@ import {
           borderStyle={'solid'}
           borderColor={useColorModeValue('gray.200', 'gray.900')}
           align={'center'}>
-            
           <Flex
             flex={{ base: 1, md: 'auto' }}
             ml={{ base: -2 }}
@@ -53,17 +52,16 @@ import {
               aria-label={'Toggle Navigation'}
             />
           </Flex>
-
           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
             <NavLink to='/'>
-                <Text
-                textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-                fontFamily={'heading'}
-                as='b'
-                fontSize='30px'
-                color={useColorModeValue('blue')}>
-                BUYC 
-                </Text>
+            <Text
+              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+              fontFamily={'heading'}
+              as='b'
+              fontSize='30px'
+              color={useColorModeValue('blue')}>
+              BUYC 
+            </Text>
             </NavLink>
   
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -76,22 +74,22 @@ import {
             justify={'flex-end'}
             direction={'row'}
             spacing={6}>
-            <Button
+            <Button  onClick={()=>{navigate("/login")}}
               as={'a'}
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href={'#'}>
+             >
               Sign In
             </Button>
-            <Button
+            <Button onClick={()=>{navigate("/signup")}}
               as={'a'}
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
               fontWeight={600}
               color={'white'}
               bg={'pink.400'}
-              href={'#'}
+             
               _hover={{
                 bg: 'pink.300',
               }}>
