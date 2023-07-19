@@ -1,19 +1,30 @@
-import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
-    Stack,
-    Link,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-  } from '@chakra-ui/react';
+import {Flex,Box,FormControl,FormLabel,Input,Checkbox,Stack,Link,Button,Heading,Text,useColorModeValue,} from '@chakra-ui/react';
+import { useState } from 'react';
+
+const initState={
+    email:"",
+    password:"",
+    isDealer:false
+}
   
   export default function Login() {
+    const [formState, setFormState]=useState(initState)
+    const {email,password,isDealer}=formState;
+
+    const handleChange=(e)=>{
+        if(e.target.name=='isDealer'){
+            setFormState({...formState, [e.target.name]:true});
+        }
+        else{
+        setFormState({...formState, [e.target.name]:e.target.value})
+        }
+      
+    }
+
+    const handleSubmit=(e)=>{
+        console.log(formState)
+    }
+
     return (
       <Flex
         minH={'100vh'}
@@ -35,21 +46,24 @@ import {
             <Stack spacing={4}>
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+                <Input type="email" name='email' value={email} onChange={handleChange} />
               </FormControl>
+
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
-                <Input type="password" />
+                <Input type="password" name='password' value={password} onChange={handleChange} />
               </FormControl>
+
               <Stack spacing={10}>
                 <Stack
                   direction={{ base: 'column', sm: 'row' }}
                   align={'start'}
                   justify={'space-between'}>
-                  <Checkbox>Remember me</Checkbox>
+                  <Checkbox value={isDealer} name='isDealer' onChange={handleChange}>are you a dealer</Checkbox>
                   <Link color={'blue.400'}>Forgot password?</Link>
                 </Stack>
-                <Button
+
+                <Button onClick={handleSubmit}
                   bg={'blue.400'}
                   color={'white'}
                   _hover={{
